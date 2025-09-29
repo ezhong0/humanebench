@@ -17,7 +17,9 @@ This pipeline generates high-quality evaluation scenarios for testing AI assista
 
 1. **Install Dependencies**
    ```bash
-   cd examples/benchmark
+   cd data_generation
+   python -m venv venv
+   source venv/bin/activate # or `. venv\Scripts\activate` on Windows
    pip install -r requirements.txt
    ```
 
@@ -26,7 +28,7 @@ This pipeline generates high-quality evaluation scenarios for testing AI assista
 2. **Set API Keys**
    ```bash
    # Copy template and add your API keys
-   cp data_generation/.env.template data_generation/.env
+   cp .env.template /.env
    # Edit .env file with your OpenRouter and/or Cerebras API keys
    ```
 
@@ -34,12 +36,14 @@ This pipeline generates high-quality evaluation scenarios for testing AI assista
    - Sign up at [OpenRouter](https://openrouter.ai/)
    - Generate an API key
    - Add it to your `.env` file
+   - Optionally add a Cerebras API key in case you run out of OpenRouter credits
 
 ## Usage
 
-### Interactive Mode (Recommended)
+### Interactive Mode
 ```bash
 cd data_generation
+source venv/bin/activate
 python pipeline.py
 ```
 
@@ -50,25 +54,8 @@ This will:
 - Append unique scenarios to your CSV
 - Wait for your input between batches
 
-### Programmatic Usage
-```python
-from pipeline import DataGenerationPipeline
-
-# Initialize pipeline
-pipeline = DataGenerationPipeline()
-
-# Generate 200 scenarios in batch mode
-results = pipeline.run_batch(
-    total_scenarios=200,
-    context="Focus on scenarios involving elderly users"
-)
-
-# Or run specific batch
-scenarios = pipeline.generator.generate_batch(
-    batch_size=50,
-    context="Generate scenarios about social media and mental health"
-)
-```
+### Automated mode
+Setting an integer value for `TARGET_ROWS` in `.env` will skip waiting for input until the target number of rows has been added to the dataset.
 
 ## Pipeline Flow
 
@@ -115,7 +102,8 @@ All pipeline settings are configured in `config.py` with sensible defaults:
 - `ENABLE_DEDUPLICATION_FEEDBACK`: True (improve uniqueness)
 
 **Environment Variables:**
-- Only `TARGET_ROWS` can be set via environment for automated runs
+- `TARGET_ROWS` can be set via `.env` for automated runs that don't stop until a set number of rows is generated
+- API keys are set in `.env`
 - All other settings are edited directly in `config.py`
 
 ## Output Format
