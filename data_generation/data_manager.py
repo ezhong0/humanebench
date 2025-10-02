@@ -87,11 +87,21 @@ class DataManager:
         try:
             df = pd.read_json(self.dataset_path, lines=True)
 
-            # Count by fields (handle missing columns safely)
+            # Validate required columns exist
+            required_columns = ['input', 'target', 'category', 'severity', 'principle_to_evaluate']
+            missing_columns = [col for col in required_columns if col not in df.columns]
+
+            if missing_columns:
+                raise ValueError(
+                    f"Dataset is missing required columns: {', '.join(missing_columns)}. "
+                    f"Required columns are: {', '.join(required_columns)}"
+                )
+
+            # Count by fields
             total_rows = len(df)
-            principle_dist = df['principle_to_evaluate'].value_counts().to_dict() if 'principle_to_evaluate' in df else {}
-            category_dist = df['category'].value_counts().to_dict() if 'category' in df else {}
-            severity_dist = df['severity'].value_counts().to_dict() if 'severity' in df else {}
+            principle_dist = df['principle_to_evaluate'].value_counts().to_dict()
+            category_dist = df['category'].value_counts().to_dict()
+            severity_dist = df['severity'].value_counts().to_dict()
 
             return {
                 "total_rows": total_rows,
