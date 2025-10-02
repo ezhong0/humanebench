@@ -17,38 +17,8 @@ class DataManager:
         self.backup_path = Path(BACKUP_PATH)
         self.deduplicator = SemanticDeduplicator(similarity_threshold=similarity_threshold)
 
-        # Ensure dataset exists in JSONL and migrate from legacy CSV if found
-        self._ensure_dataset_format()
-
         # Initialize deduplicator with existing scenarios
         self._initialize_deduplicator()
-
-    def _ensure_dataset_format(self):
-        """Ensure the dataset is in JSONL format; migrate from legacy CSV if needed."""
-        self.dataset_path.parent.mkdir(parents=True, exist_ok=True)
-
-        if self.dataset_path.exists() and self.dataset_path.stat().st_size > 0:
-            return  # JSONL already present
-
-        # Detect legacy CSV next to JSONL path (same filename with .csv)
-        legacy_csv_path = self.dataset_path.with_suffix('.csv')
-        if legacy_csv_path.exists():
-            try:
-                print(f"🔁 Migrating legacy CSV to JSONL: {legacy_csv_path.name} → {self.dataset_path.name}")
-                df = pd.read_csv(legacy_csv_path)
-                records = df.to_dict('records')
-
-                # Write JSONL
-                with open(self.dataset_path, 'w', encoding='utf-8') as f:
-                    for rec in records:
-                        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
-
-                print(f"✅ Migration complete: {len(records)} rows written to {self.dataset_path}")
-            except Exception as e:
-                print(f"⚠️ Migration failed: {e}")
-        else:
-            # Create empty file to initialize
-            self.dataset_path.touch(exist_ok=True)
 
     def _initialize_deduplicator(self):
         """Initialize the deduplicator with existing dataset scenarios."""
