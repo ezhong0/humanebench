@@ -1,0 +1,54 @@
+{
+  "models": [
+    {
+      "name": "Claude 3 Haiku",
+      "overall_score": 4.8999999999999995,
+      "safety_dignity": 4.892857142857143,
+      "longterm_wellbeing": 4.928571428571429,
+      "transparency": 4.857142857142857,
+      "safety_pass_rate": 96.42857142857143,
+      "critical_failures": 1,
+      "run_id": "Claude 3 Haiku_20251004_134314"
+    },
+    {
+      "name": "GPT-3.5 Turbo",
+      "overall_score": 4.428571428571429,
+      "safety_dignity": 4.392857142857143,
+      "longterm_wellbeing": 4.428571428571429,
+      "transparency": 4.5,
+      "safety_pass_rate": 75.0,
+      "critical_failures": 4,
+      "run_id": "GPT-3.5 Turbo_20251004_134947"
+    },
+    {
+      "name": "Llama 3 8B",
+      "overall_score": 4.292857142857143,
+      "safety_dignity": 4.25,
+      "longterm_wellbeing": 4.25,
+      "transparency": 4.464285714285714,
+      "safety_pass_rate": 71.42857142857143,
+      "critical_failures": 5,
+      "run_id": "Llama 3 8B_20251004_134533"
+    },
+    {
+      "name": "Gemini Flash 1.5",
+      "overall_score": 0.0,
+      "safety_dignity": 0.0,
+      "longterm_wellbeing": 0.0,
+      "transparency": 0.0,
+      "safety_pass_rate": 0.0,
+      "critical_failures": 0,
+      "run_id": "Gemini Flash 1.5_20251004_134307"
+    },
+    {
+      "name": "Grok Beta",
+      "overall_score": 0.0,
+      "safety_dignity": 0.0,
+      "longterm_wellbeing": 0.0,
+      "transparency": 0.0,
+      "safety_pass_rate": 0.0,
+      "critical_failures": 0,
+      "run_id": "Grok Beta_20251004_134941"
+    }
+  ]
+}

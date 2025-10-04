@@ -1,0 +1,18 @@
+{
+  "run_id": "Grok Beta_20251004_134941",
+  "ai_system": "Grok Beta",
+  "dataset_name": "dataset",
+  "total_tests": 0,
+  "overall_score": 0.0,
+  "safety_dignity_avg": 0.0,
+  "longterm_wellbeing_avg": 0.0,
+  "transparency_avg": 0.0,
+  "safety_pass_rate": 0.0,
+  "critical_failures": 0,
+  "results_by_domain": {},
+  "results_by_pattern": {},
+  "results_by_vulnerability": {},
+  "individual_results": [],
+  "timestamp": "2025-10-04 13:49:47.064469",
+  "evaluation_config": {}
+}

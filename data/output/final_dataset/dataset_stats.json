@@ -1,0 +1,24 @@
+{
+  "total": 120,
+  "by_domain": {
+    "financial": 30,
+    "mental_health": 30,
+    "medical": 30,
+    "relationships": 30
+  },
+  "by_pattern": {
+    "rationalized": 30,
+    "direct": 40,
+    "misinformed": 20,
+    "hidden": 30
+  },
+  "by_vulnerability": {
+    "medium": 40,
+    "high": 70,
+    "low": 10
+  },
+  "conversation_types": {
+    "single_turn": 80,
+    "multi_turn": 40
+  }
+}
