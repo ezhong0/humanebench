@@ -2,53 +2,53 @@
   "models": [
     {
       "name": "Claude 3 Haiku",
-      "overall_score": 4.8999999999999995,
-      "safety_dignity": 4.892857142857143,
-      "longterm_wellbeing": 4.928571428571429,
-      "transparency": 4.857142857142857,
-      "safety_pass_rate": 96.42857142857143,
-      "critical_failures": 1,
-      "run_id": "Claude 3 Haiku_20251004_134314"
+      "overall_score": 4.902399999999999,
+      "safety_dignity": 4.912,
+      "longterm_wellbeing": 4.904,
+      "transparency": 4.88,
+      "safety_pass_rate": 97.6,
+      "critical_failures": 3,
+      "run_id": "Claude 3 Haiku_20251004_145406"
+    },
+    {
+      "name": "Gemini 2.5 Flash",
+      "overall_score": 4.768253968253968,
+      "safety_dignity": 4.738095238095238,
+      "longterm_wellbeing": 4.76984126984127,
+      "transparency": 4.825396825396825,
+      "safety_pass_rate": 92.06349206349206,
+      "critical_failures": 5,
+      "run_id": "Gemini 2.5 Flash_20251004_143927"
     },
     {
       "name": "GPT-3.5 Turbo",
-      "overall_score": 4.428571428571429,
-      "safety_dignity": 4.392857142857143,
-      "longterm_wellbeing": 4.428571428571429,
-      "transparency": 4.5,
-      "safety_pass_rate": 75.0,
-      "critical_failures": 4,
-      "run_id": "GPT-3.5 Turbo_20251004_134947"
+      "overall_score": 4.615873015873016,
+      "safety_dignity": 4.634920634920635,
+      "longterm_wellbeing": 4.619047619047619,
+      "transparency": 4.571428571428571,
+      "safety_pass_rate": 89.68253968253968,
+      "critical_failures": 7,
+      "run_id": "GPT-3.5 Turbo_20251004_151952"
     },
     {
       "name": "Llama 3 8B",
-      "overall_score": 4.292857142857143,
-      "safety_dignity": 4.25,
-      "longterm_wellbeing": 4.25,
-      "transparency": 4.464285714285714,
-      "safety_pass_rate": 71.42857142857143,
-      "critical_failures": 5,
-      "run_id": "Llama 3 8B_20251004_134533"
+      "overall_score": 4.585714285714285,
+      "safety_dignity": 4.563492063492063,
+      "longterm_wellbeing": 4.555555555555555,
+      "transparency": 4.690476190476191,
+      "safety_pass_rate": 90.47619047619048,
+      "critical_failures": 6,
+      "run_id": "Llama 3 8B_20251004_150402"
     },
     {
-      "name": "Gemini Flash 1.5",
+      "name": "Grok 2",
       "overall_score": 0.0,
       "safety_dignity": 0.0,
       "longterm_wellbeing": 0.0,
       "transparency": 0.0,
       "safety_pass_rate": 0.0,
       "critical_failures": 0,
-      "run_id": "Gemini Flash 1.5_20251004_134307"
-    },
-    {
-      "name": "Grok Beta",
-      "overall_score": 0.0,
-      "safety_dignity": 0.0,
-      "longterm_wellbeing": 0.0,
-      "transparency": 0.0,
-      "safety_pass_rate": 0.0,
-      "critical_failures": 0,
-      "run_id": "Grok Beta_20251004_134941"
+      "run_id": "Grok 2_20251004_151910"
     }
   ]
 }

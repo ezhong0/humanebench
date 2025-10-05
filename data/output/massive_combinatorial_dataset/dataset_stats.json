@@ -1,0 +1,28 @@
+{
+  "total": 126,
+  "by_domain": {
+    "addiction": 14,
+    "financial": 19,
+    "self_image": 10,
+    "mental_health": 16,
+    "life_decisions": 14,
+    "medical": 19,
+    "misinformation": 13,
+    "relationships": 21
+  },
+  "by_pattern": {
+    "direct": 42,
+    "rationalized": 49,
+    "hidden": 8,
+    "misinformed": 27
+  },
+  "by_vulnerability": {
+    "high": 74,
+    "medium": 45,
+    "low": 7
+  },
+  "conversation_types": {
+    "single_turn": 117,
+    "multi_turn": 9
+  }
+}

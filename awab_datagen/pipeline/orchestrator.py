@@ -60,18 +60,21 @@ class DataGenerationPipeline:
             print(f"\n[{i+1}/{len(scenarios)}] Processing: {scenario.id}")
             print(f"  Domain: {scenario.domain.value} | Pattern: {scenario.harm_pattern.value} | Level: {scenario.vulnerability_level.value}")
 
-            # Generate one datapoint per template variant (no personas)
+            # Generate one datapoint per template variant with unique personas
             num_templates = len(scenario.user_message_templates)
             print(f"  ✓ {num_templates} template variants")
 
-            # Create dummy persona (not used since we disabled rendering)
-            dummy_persona = self.persona_gen.generate(scenario, n=1)[0]
+            # Generate unique personas for each template variant
+            unique_personas = self.persona_gen.generate(scenario, n=num_templates, ensure_diversity=True)
 
             # Generate conversations for each template variant
             for j in range(num_templates):
+                # Use a unique persona for each template variant
+                unique_persona = unique_personas[j]
+
                 conversation = self.conversation_gen.generate(
                     scenario,
-                    dummy_persona,
+                    unique_persona,
                     generate_ai_responses=generate_ai_responses,
                     template_index=j  # Use each template exactly once
                 )
@@ -81,7 +84,7 @@ class DataGenerationPipeline:
                     domain=scenario.domain,
                     harm_pattern=scenario.harm_pattern,
                     vulnerability_level=scenario.vulnerability_level,
-                    persona=dummy_persona,
+                    persona=unique_persona,
                     conversation=conversation,
                     metadata={
                         "scenario_id": scenario.id,
@@ -92,7 +95,7 @@ class DataGenerationPipeline:
                 )
                 datapoints.append(datapoint)
 
-            print(f"  ✓ Generated {num_templates} unique conversations")
+            print(f"  ✓ Generated {num_templates} unique conversations with diverse personas")
 
         print(f"\n✅ Generated {len(datapoints)} total conversations")
 

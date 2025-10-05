@@ -1,4 +1,4 @@
-"""Run multi-model evaluation and create unified comparison report."""
+"""Run multi-model evaluation with optimized output (80/20 - minimal overhead)."""
 
 import os
 from pathlib import Path
@@ -9,11 +9,11 @@ load_dotenv()
 from awab_evaluator.adapters import OpenAIAdapter, OpenRouterAdapter
 from awab_evaluator.evaluation import LLMEvaluator
 from awab_evaluator.runners import BenchmarkRunner
-from awab_evaluator.reporting import HTMLReportGenerator, MultiModelComparisonHTMLGenerator
+from awab_evaluator.reporting.multi_model_comparison_html_lite import MultiModelComparisonHTMLGeneratorLite
 
 # Configuration
 DATASET_PATH = Path("data/output/massive_combinatorial_dataset/dataset.jsonl")
-OUTPUT_DIR = Path("data/evaluation_results")
+OUTPUT_DIR = Path("data/evaluation_results_optimized")
 MAX_TESTS = None  # Test all examples
 
 # Affordable models to test
@@ -34,9 +34,9 @@ MODELS_TO_TEST = [
         "model": "meta-llama/llama-3-8b-instruct",
     },
     {
-        "name": "Grok 3 Mini",
+        "name": "Grok 2",
         "provider": "openrouter",
-        "model": "x-ai/grok-3-mini",
+        "model": "x-ai/grok-2-1212",
     },
     {
         "name": "GPT-3.5 Turbo",
@@ -60,7 +60,7 @@ def create_adapter(provider, model, api_key):
 
 def main():
     print("\n" + "="*70)
-    print("AWAB Multi-Model Benchmark Evaluation")
+    print("AWAB Multi-Model Benchmark Evaluation (OPTIMIZED)")
     print("="*70)
 
     # Get API keys
@@ -78,7 +78,8 @@ def main():
     print(f"\n✓ Testing {len(MODELS_TO_TEST)} models")
     print(f"✓ Dataset: {DATASET_PATH}")
     print(f"✓ Tests per model: {MAX_TESTS}")
-    print(f"✓ Evaluator: {EVALUATOR_MODEL}\n")
+    print(f"✓ Evaluator: {EVALUATOR_MODEL}")
+    print(f"✓ Optimization: Minimal output overhead\n")
 
     # Create evaluator
     evaluator_key = openai_key if EVALUATOR_PROVIDER == "openai" else openrouter_key
@@ -118,11 +119,8 @@ def main():
 
             all_results.append(results)
 
-            # Generate individual HTML report
-            report_gen = HTMLReportGenerator()
-            report_path = OUTPUT_DIR / results.run_id / "report.html"
-            report_gen.generate(results, report_path)
-            print(f"\n✓ Report: {report_path}")
+            # Skip individual HTML report generation to save time
+            print(f"\n✓ Evaluation complete for {model_config['name']}")
 
         except Exception as e:
             print(f"\n❌ Error evaluating {model_config['name']}: {e}")
@@ -155,20 +153,6 @@ def main():
                 f"{result.critical_failures:<10}"
             )
 
-        print(f"\n{'='*70}")
-        print("Detailed Breakdown by Model")
-        print(f"{'='*70}\n")
-
-        for result in sorted_results:
-            print(f"\n{result.ai_system}")
-            print("-" * 40)
-            print(f"  Overall Score:        {result.overall_score:.2f}/5.0")
-            print(f"  Safety & Dignity:     {result.safety_dignity_avg:.2f}/5.0")
-            print(f"  Long-term Wellbeing:  {result.longterm_wellbeing_avg:.2f}/5.0")
-            print(f"  Transparency:         {result.transparency_avg:.2f}/5.0")
-            print(f"  Safety Pass Rate:     {result.safety_pass_rate:.1f}%")
-            print(f"  Critical Failures:    {result.critical_failures}")
-
         # Save comparison data
         import json
         comparison_file = OUTPUT_DIR / "multi_model_comparison.json"
@@ -198,7 +182,7 @@ def main():
         print("GENERATING COMPREHENSIVE COMPARISON REPORT")
         print(f"{'='*70}\n")
 
-        comparison_report_gen = MultiModelComparisonHTMLGenerator()
+        comparison_report_gen = MultiModelComparisonHTMLGeneratorLite()
         comparison_report_path = OUTPUT_DIR / "comprehensive_multi_model_comparison.html"
         comparison_report_gen.generate(sorted_results, comparison_report_path)
 
