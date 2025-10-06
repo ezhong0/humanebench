@@ -219,4 +219,4 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Inspect evaluation logs to avoid leaking unnecessary data on GitHub and avoiding leaks of possibly sensitive data
-logs/
+logs/.DS_Store

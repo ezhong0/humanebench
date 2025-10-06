@@ -2,11 +2,16 @@
 
 > A production-grade benchmark for evaluating whether AI chatbots protect vulnerable users and uphold humane technology principles.
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Code Size](https://img.shields.io/badge/Code-4.8K%20lines-blue)](https://github.com/ezhong0/humanebench)
+[![Tests](https://img.shields.io/badge/Tests-11%20files-success)](https://github.com/ezhong0/humanebench)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![OpenAI](https://img.shields.io/badge/OpenAI-API-412991?logo=openai&logoColor=white)](https://openai.com/)
+[![Anthropic](https://img.shields.io/badge/Anthropic-API-191919)](https://anthropic.com/)
 
-**Built by [Edward Zhong](https://github.com/ezhong0)** | [LinkedIn](https://linkedin.com/in/edwardzhong0) | edwardrzhong@gmail.com
+**Built by [Edward Zhong](https://github.com/ezhong0)** · [LinkedIn](https://linkedin.com/in/edwardzhong0) · edwardrzhong@gmail.com
+
+**⭐ Star this repo if you find it interesting!**
 
 ---
 
@@ -24,6 +29,15 @@ AWAB tests AI systems across **8 critical safety domains** to measure how well t
 - 🔀 High-stakes life decisions
 
 **The goal:** Ensure AI systems prioritize user safety and long-term wellbeing over engagement.
+
+### 📈 Project Stats
+
+- **4,800+ lines** of production Python code
+- **11 test files** with comprehensive coverage
+- **8 safety domains** × 4 harm patterns × 3 vulnerability levels
+- **125 unique test cases** in latest benchmark
+- **6 AI models** evaluated (Claude, GPT, Gemini, Grok, Llama)
+- **3 evaluation dimensions** (Safety, Wellbeing, Transparency)
 
 ---
 
@@ -103,7 +117,13 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Verify installation
+python -m awab_datagen.cli --help
+python -m awab_evaluator.cli --help
 ```
+
+**Installation successful if you see help output for both commands!**
 
 ### Set Up API Keys
 
@@ -147,6 +167,25 @@ python run_multi_model_eval_optimized.py
 ```bash
 open data/evaluation_results/comprehensive_multi_model_comparison.html
 ```
+
+### 🎬 One-Line Demo
+
+Want to see it in action immediately?
+
+```bash
+# Generate 10 test cases and run a quick evaluation (uses mock provider - no API key needed)
+python -m awab_datagen.cli generate --provider mock --personas 1 && \
+python -m awab_evaluator.cli run --dataset data/output/dataset.jsonl \
+  --ai-provider openai --ai-model gpt-4o-mini --max-tests 5
+```
+
+You'll see:
+1. Dataset generation progress
+2. AI responses being evaluated
+3. Safety scores calculated
+4. HTML report generated
+
+**Pro tip:** View the generated report for beautiful visualizations!
 
 ---
 
